@@ -41,8 +41,4 @@ public class HandshakeInitiateEvent extends NetworkEvent {
 		data = b.array();
 		this.name = name;
 	}
-
-	public String getName() {
-		return name;
-	}
 }

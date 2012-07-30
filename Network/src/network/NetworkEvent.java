@@ -2,15 +2,17 @@ package network;
 
 import static network.NetworkProtocol.HANDSHAKE;
 import static network.NetworkProtocol.INITIATE;
+import static network.NetworkProtocol.POSITION;
 import static network.NetworkProtocol.RESPONSE;
-
+import static network.NetworkProtocol.UPDATE;
+import static network.NetworkProtocol.VELOCITY;
 
 public class NetworkEvent {
 	public final byte category;
-	
+
 	protected byte[] data;
 	public final byte type;
-	
+
 	public NetworkEvent(byte category, byte type) {
 		this.category = category;
 		this.type = type;
@@ -23,7 +25,7 @@ public class NetworkEvent {
 		category = data[0];
 		type = data[1];
 	}
-	
+
 	public NetworkEvent(NetworkEvent recieved) {
 		this(recieved.data);
 	}
@@ -34,6 +36,14 @@ public class NetworkEvent {
 
 	public boolean isHandshakeResponseEvent() {
 		return category == HANDSHAKE && type == RESPONSE;
+	}
+
+	public boolean isUpdatePositionEvent() {
+		return category == UPDATE && type == POSITION;
+	}
+
+	public boolean isUpdateVelocityEvent() {
+		return category == UPDATE && type == VELOCITY;
 	}
 
 	public byte[] toByteArray() {
